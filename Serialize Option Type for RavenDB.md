@@ -21,6 +21,7 @@ Only things I could find.
 	
   Halfway down the page. Source code for converter at GitHub, *colinbull/FSharpEnt /src/FSharp.Enterprise/[Json.fs](https://github.com/colinbull/FSharpEnt/blob/develop/src/FSharp.Enterprise/Json.fs)*
 
+	
 	let customisedStore =
 		let customiseSerialiser (s : Raven.Imports.Newtonsoft.Json.JsonSerializer) =
 		s.Converters.Add(new Json.MapTypeConverter())
