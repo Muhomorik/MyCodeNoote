@@ -46,7 +46,7 @@ namespace Sideways_overriding_with_partial_methods
 
     /// <summary>
     /// Trying to play with Skeet's code. Original script.
-    /// <a href="http://codebetter.com/blogs/david.hayden/articles/59642.aspx">Originalhere</a>.
+    /// <a href="http://codeblog.jonskeet.uk/2015/07/27/sideways-overriding-with-partial-methods/">Original here</a>.
     /// </summary>
     class Program
     {
