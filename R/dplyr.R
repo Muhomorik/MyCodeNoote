@@ -1,5 +1,9 @@
 library(dplyr)
 
+#
+# Note: examples only, no data!
+#
+
 mydf <- read.csv(path2csv, stringsAsFactors = FALSE)
 
 dim(mydf)
@@ -56,4 +60,32 @@ mutate(cran3, size_mb = size / 2^20, size_gb = size_mb / 2^10)
 
 # summarize(), collapses the dataset to a single row.
 summarize(cran, avg_bytes = mean(size))
+
+# Group cran by the package variable.
+by_package <- group_by(cran, package)
+
+# use summarize() to apply mean(size) to the grouped data in by_package.
+summarize(by_package, mean(size))
+
+# This is a faster and more concise equivalent of length(unique(x)).
+# n_distinct {dplyr} 
+
+# In statistics, this is called the 0.99, or 99%, sample quantile.
+quantile(pack_sum$count, probs = 0.99)
+
+# ------------- Chaining --------------------
+
+cran %>%
+  select(ip_id, country, package, size) %>%
+  print
+
+cran %>%
+  select(ip_id, country, package, size) %>%
+  mutate(size_mb = size / 2^20)
+
+cran %>%
+  select(ip_id, country, package, size) %>%
+  mutate(size_mb = size / 2^20) %>%
+  filter(size_mb <= 0.5)
+
 
