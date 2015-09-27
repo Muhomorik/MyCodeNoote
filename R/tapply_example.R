@@ -25,4 +25,14 @@ tapply(flags$population, flags$red, summary)
 
 # $`1`
 # Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-# 0.0     0.0     4.0    22.1    15.0  1008.0 
+# 0.0     0.0     4.0    22.1    15.0  1008.0
+ 
+splitted <- split(flags, flags$landmass)
+# list of 6
+
+spl2 <- sapply(flags, function(x) colMeans(flags[, c("landmass", "zone", "language")], na.rm = TRUE))
+spl2
+# name landmass     zone     area population language religion     bars  stripes
+# landmass 3.572165 3.572165 3.572165 3.572165   3.572165 3.572165 3.572165 3.572165 3.572165
+
+
