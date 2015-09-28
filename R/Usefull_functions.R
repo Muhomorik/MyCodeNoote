@@ -1,3 +1,6 @@
+# Must set locale for dates and correct sorting.
+Sys.setlocale("LC_COLLATE", "C")
+
 # counts at each combination of factor levels.
 table(flags$landmass)
 # 1  2  3  4  5  6 
