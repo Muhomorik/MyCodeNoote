@@ -1,3 +1,7 @@
+# Load packages from list.
+packages <- c("dplyr", "data.table")
+sapply(packages, require, character.only = TRUE, quietly = TRUE)
+
 # Must set locale for dates and correct sorting.
 Sys.setlocale("LC_COLLATE", "C")
 
