@@ -58,6 +58,9 @@ mutate(cran3, size_mb = size / 2^20)
 # use the value computed for your second column(size_mb) to create a third column.
 mutate(cran3, size_mb = size / 2^20, size_gb = size_mb / 2^10)
 
+# Change type
+mutate(year = as.factor(year)) %>%
+  
 # summarize(), collapses the dataset to a single row.
 summarize(cran, avg_bytes = mean(size))
 
@@ -88,4 +91,11 @@ cran %>%
   mutate(size_mb = size / 2^20) %>%
   filter(size_mb <= 0.5)
 
+  
+# Filter rows.  
+# http://stackoverflow.com/questions/22850026/filtering-row-which-contains-a-certain-string-using-dplyr
 
+# Replace NA.
+activity.filled <- activity  %>%
+  group_by(interval) %>%
+  mutate(steps = replace(steps, is.na(steps), mean(steps, na.rm=TRUE)))
