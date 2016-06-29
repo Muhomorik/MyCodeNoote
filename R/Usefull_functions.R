@@ -123,6 +123,7 @@ readkey <- function()
     number <- scan(n=1)
 }
 
+library(utils)
 
 # Progress bar.
 # use txtProgressBar for console.
