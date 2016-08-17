@@ -1,0 +1,73 @@
+﻿{
+module TheLexer
+
+open System
+open Microsoft.FSharp.Text.Lexing
+open TheParser
+let lexeme = LexBuffer<_>.LexemeString
+
+let cobolWords =   
+    [   
+        "IDENTIFICATION DIVISION.", IDENTIFICATION;
+        "PROGRAM-ID.", PROGRAM_ID;
+        "AUTHOR.", AUTHOR;
+        "DATA DIVISION.", DATA;
+        "WORKING-STORAGE SECTION.", WORKING_STORAGE;
+        "PROCEDURE DIVISION.", PROCEDURE;
+        "STOP RUN.", STOP;
+    ] |> Map.ofList
+
+let commands =   
+    [   
+        "DISPLAY", DISPLAY;
+        "ACCEPT", ACCEPT;
+        "IF", IF;
+        "END-IF", END_IF;
+        "IS", IS;
+    ] |> Map.ofList
+
+let doMatch (dict : Map<'a,'b>) str = 
+  match dict.TryFind(str) with
+    | Some(token) -> token
+    | None -> ID(str) 
+
+let log (id : string) (str : string) = Console.WriteLine(id + " " + str)
+}
+
+let whitespace         = [' ' '\t']
+let newline            = "\n\r" | '\n' | '\r'
+let digit              = ['0'-'9']
+let dot                = '.'
+let comma              = ','
+let lineTerminator     = '.'newline
+let comment            = '*'_*
+
+let identifierChar = ['A'-'Z' ' ' '-']
+let identifier     = identifierChar+'.'
+
+let commandChar = ['A'-'Z' '-']
+let command     = commandChar+
+
+let freeLiteral   = ['A'-'Z' 'a'-'z' '-']
+let anyNotQuote   = [^'"']
+let literal       = '"'anyNotQuote*'"'
+let slotSizeBegin = "PIC "commandChar+'('
+let bracketClose  = ')'
+
+
+rule tokenize = parse
+  | identifier      { log "identifier" (lexeme lexbuf); doMatch cobolWords (lexeme lexbuf) }
+  | command         { log "command" (lexeme lexbuf); doMatch commands (lexeme lexbuf) }
+  | digit+          { log "digit+" (lexeme lexbuf); NUMBER(Convert.ToInt32(lexeme lexbuf)) }
+  | freeLiteral+    { log "freeLiteral+" (lexeme lexbuf); ID(lexeme lexbuf) }
+  | literal         { log "literal" (lexeme lexbuf); LITERAL(lexeme lexbuf) }
+  | whitespace      { log "_" (lexeme lexbuf); tokenize lexbuf }
+  | comment         { log "comment" (lexeme lexbuf); tokenize lexbuf }
+  | dot             { log "" (lexeme lexbuf); tokenize lexbuf }
+  | comma           { log "" (lexeme lexbuf); tokenize lexbuf }
+  | slotSizeBegin   { log "slotSizeBegin" (lexeme lexbuf); tokenize lexbuf }
+  | bracketClose    { log "bracketClose" (lexeme lexbuf); tokenize lexbuf }
+  | lineTerminator  { log "lineTerminator" (lexeme lexbuf); lexbuf.EndPos <- lexbuf.EndPos.NextLine; tokenize lexbuf; }
+  | newline         { log "newline" (lexeme lexbuf); lexbuf.EndPos <- lexbuf.EndPos.NextLine; tokenize lexbuf }
+  | eof             { log "eof" (lexeme lexbuf); EOF }
+  | _               { failwithf "unrecognized input: '%s'" <| lexeme lexbuf }

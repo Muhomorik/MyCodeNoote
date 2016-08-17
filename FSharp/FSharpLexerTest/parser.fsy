@@ -1,0 +1,85 @@
+﻿%{
+open Ast
+%}
+
+%token <int> NUMBER
+%token <string> ID
+%token <string> LITERAL SLOT
+%token IDENTIFICATION PROGRAM_ID AUTHOR EOF
+%token PROCEDURE DATA WORKING_STORAGE
+%token DISPLAY ACCEPT STOP IF END_IF
+%token IS
+
+%start start
+%type <cobolSourceProgram> start
+
+%%
+
+start: 
+  | identification procedures { 
+     { 
+       IdentDiv = $1; 
+       ProcDiv = Some($2); 
+       EnvDiv = None; 
+       DataDiv = None; 
+       NestedCobolProg = None; 
+      } 
+    }
+  | identification data procedures { 
+    { 
+      IdentDiv = $1; 
+      ProcDiv = Some($3); 
+      EnvDiv = None; 
+      DataDiv = Some($2); 
+      NestedCobolProg = None; 
+    } 
+  }
+
+identification: 
+  | IDENTIFICATION PROGRAM_ID ID AUTHOR ID { 
+    { 
+      ProgramId = $3; 
+      Author = Some($5); 
+      Installation = None; 
+      DateWritten = None; 
+      DateCompiled = None; 
+    } 
+  }
+  | IDENTIFICATION AUTHOR ID PROGRAM_ID ID { 
+    { 
+      ProgramId = $5; 
+      Author = Some($3); 
+      Installation = None; 
+      DateWritten = None; 
+      DateCompiled = None; 
+    } 
+  }
+
+data: DATA sections { $2 }
+
+sections:
+  | WORKING_STORAGE slotDeclarations { [WorkStorage($2)] }
+
+slotDeclarations: 
+  | slot { [$1] }
+  | slotDeclarations slot { $2 :: $1 }
+
+slot:
+  | NUMBER ID NUMBER { { Index = $1; Name = $2; Size = $3; } }
+
+procedures: PROCEDURE statements { $2 }
+
+statements: 
+  | command { [$1] }
+  | statements command { $1 @ [$2] }
+
+op: IS { Is }
+
+condition:
+  | ID op ID { Comparison($1, $2, $3) }
+
+command: 
+  | DISPLAY LITERAL    { DisplayStatement($2) }
+  | DISPLAY LITERAL ID { FormatDisplayStatement($2, $3) }
+  | ACCEPT ID { AcceptStatement($2) }
+  | IF condition statements END_IF { IfStatement { Condition = $2; IfBranch = $3; ElseBranch = None } }
