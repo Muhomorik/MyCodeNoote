@@ -147,3 +147,17 @@ for(i in 1:total){
   setTxtProgressBar(pb, i)
 }
 close(pb)
+
+# Read data from Clipboard (windows only)
+
+# copy, ctrl+c, to clipboard. With lastempty line.
+h1 h2 h3
+1 2 3
+
+library(utils)
+x <- read.table(file = "clipboard", sep = " ", header=TRUE)
+x
+
+# or use 'read.delim'
+x <- read.delim("clipboard")      # win
+x <- read.delim(pipe(“pbpaste”))  # Mac OS
