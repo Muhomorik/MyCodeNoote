@@ -10,6 +10,19 @@ remove.packages(pkgs = c("quanteda"))
 # Must set locale for dates and correct sorting.
 Sys.setlocale("LC_COLLATE", "C")
 
+# MRO-repo override fix. Uses OWN snapshot with outdated packages.
+
+# Microsoft R Open 3.2.3
+# Default CRAN mirror snapshot taken on 2016-01-01
+
+getOption("repos")
+# CRAN "https://mran.revolutionanalytics.com/snapshot/2016-01-01" 
+
+# fix
+options(repos=structure(c(CRAN="http://cloud.r-project.org/"))) # mirrors https://cran.r-project.org/mirrors.html
+getOption("repos")
+# CRAN "http://cloud.r-project.org/" 
+
 #basename removes all of the path up to and including the last path 
 basename("C:/test/file.r")
 # [1] "file.r"
