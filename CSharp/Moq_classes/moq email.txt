@@ -1,0 +1,28 @@
+        private Mock<IEmail> mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mock = new Mock<IEmail>();
+
+            // properties
+            mock.SetupProperty(f => f.Ho, "Ho");
+            mock.SetupProperty(f => f.From);
+        }
+
+        [Test]
+        public void HoSetTest()
+        {
+            // Arrange
+
+            // Act
+            IEmail targer = mock.Object;
+            //targer.From = new MailboxAddress("test@example.com");
+            //
+
+            // Assert
+            Assert.AreEqual("Ho", targer.Ho);
+
+            targer.Ho = "mjaw";
+            Assert.AreEqual("mjaw", targer.Ho);
+        }
