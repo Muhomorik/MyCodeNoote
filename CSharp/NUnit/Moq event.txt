@@ -1,0 +1,3 @@
+http://stackoverflow.com/questions/37286783/how-do-i-raise-an-event-when-a-method-is-called-using-moq
+http://stackoverflow.com/questions/6378294/moq-verify-events-triggered
+https://weblogs.asp.net/mehfuzh/how-to-raise-event-for-a-mocked-call

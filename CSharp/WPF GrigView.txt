@@ -1,0 +1,2 @@
+http://stackoverflow.com/questions/1223280/how-can-i-set-the-color-of-a-selected-row-in-datagrid
+http://stackoverflow.com/questions/4539909/wpf-datagrid-selected-row-style

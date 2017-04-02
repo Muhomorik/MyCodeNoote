@@ -1,0 +1,1 @@
+http://stackoverflow.com/questions/22606067/mediaelement-play-from-within-viewmodel

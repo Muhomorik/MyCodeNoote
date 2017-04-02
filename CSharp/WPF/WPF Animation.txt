@@ -1,0 +1,29 @@
+Trigger, DataTrigger & EventTrigger
+http://www.wpf-tutorial.com/styles/trigger-datatrigger-event-trigger/
+
+Animation Overview
+https://msdn.microsoft.com/en-us/library/ms752312(v=vs.110).aspx
+
+Storyboards Overview
+https://msdn.microsoft.com/en-us/library/ms742868(v=vs.110).aspx
+
+Animation and Timing How-to Topics
+https://msdn.microsoft.com/en-us/library/ms746916(v=vs.110).aspx
+
+Timing Behaviors Overview
+https://msdn.microsoft.com/en-us/library/aa970270(v=vs.110).aspx
+
+
+Add easing effects on your animations with WPF 4 easing functions
+https://blogs.msdn.microsoft.com/maximelamure/2009/11/10/add-easing-effects-on-your-animations-with-wpf-4-easing-functions/
+
+A Simple WPF Loading Animation
+https://elegantcode.com/2009/08/21/a-simple-wpf-loading-animation/
+
+KISS: Having fun with WPF - Creating cool loading animation
+http://jonatan.nilsson.is/kiss-having-fun-with-wpf-creating-cool-loading-animation/
+
+Animation using Storyboards in WPF
+https://www.codeproject.com/Articles/364529/Animation-using-Storyboards-in-WPF
+
+

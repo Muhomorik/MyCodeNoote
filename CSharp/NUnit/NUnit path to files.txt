@@ -1,0 +1,7 @@
+Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+
+https://github.com/nunit/nunit/issues/1072
+http://stackoverflow.com/questions/33740192/is-there-test-status-property-in-nunit-3-0
+https://github.com/nunit/docs/wiki/TestContext
+
+TestContext.CurrentContext.TestDirectory
