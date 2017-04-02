@@ -1,0 +1,31 @@
+int value = 8;
+string binary = Convert.ToString(value, 2);
+var x = binary.ToCharArray().Select(c => c.ToString()).ToArray();
+var conv = Array.ConvertAll(x, int.Parse);
+
+or
+
+String myString = "My String";
+String[] myString.Cast<char>().Cast<string>().ToArray();
+
+Permutations
+
+List<string> myString = {"a", "b", "c", "d", "f"};
+List<String> result = new List<String> ();
+for (int i = 0; i < myString.Count; i++)
+{
+    for (int j = 0; j < myString.Count; j++)
+    {
+        if (i == j)
+            continue;
+        result.Add(myString[i] + myString[j]);
+    }
+}
+
+
+Flatten (to single line)  array
+
+int[] flattened = a.SelectMany(x => x).ToArray();
+
+List to string
+var result = string.Join(",", list.ToArray());
