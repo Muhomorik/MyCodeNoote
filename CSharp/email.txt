@@ -1,0 +1,11 @@
+System.Net.Mail Namespace
+https://msdn.microsoft.com/en-us/library/system.net.mail(v=vs.110).aspx
+
+how to send email with alternate views either plain text or HTml templates.?
+http://stackoverflow.com/questions/12576979/how-to-send-email-with-alternate-views-either-plain-text-or-html-templates
+
+Send email with image embedded - image not visible
+http://stackoverflow.com/questions/5293078/send-email-with-image-embedded-image-not-visible
+
+How to send an e-mail with C# through Gmail
+http://stackoverflow.com/questions/29465096/how-to-send-an-e-mail-with-c-sharp-through-gmail
