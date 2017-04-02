@@ -1,0 +1,34 @@
+Video file properties
+http://stackoverflow.com/questions/220097/read-write-extended-file-properties-c
+http://stackoverflow.com/questions/26695297/c-sharp-reading-video-metadata-in-windows-title-description-year
+
+via shell
+http://stackoverflow.com/questions/14439169/is-there-a-correct-way-to-get-file-details-in-windows-since-getdetailsof-column
+http://stackoverflow.com/questions/2265759/how-to-read-the-properties-of-files-using-ipropertystorage/2266316#2266316
+http://stackoverflow.com/questions/22382010/what-options-are-available-for-shell32-folder-getdetailsof
+properties
+https://msdn.microsoft.com/en-us/library/bb759748(VS.85).aspx
+
+
+error fixes:
+http://stackoverflow.com/questions/14543340/calling-shell32-dll-from-net-windows-service
+http://stackoverflow.com/questions/26646068/getting-metadata-information-from-a-file-using-c-sharp
+http://stackoverflow.com/questions/22382010/what-options-are-available-for-shell32-folder-getdetailsof
+
+https://stackoverflow.com/questions/12075188/reference-a-windows-shell-interface-using-net-4-0
+
+attrs:
+http://stackoverflow.com/questions/22382010/what-options-are-available-for-shell32-folder-getdetailsof
+https://blog.dotnetframework.org/2014/12/10/read-extended-properties-of-a-file-in-c/
+ If you pass null into GetDetailsOf then it responds with the column names
+ 
+ 
+ 
+ 
+	Type t = Type.GetTypeFromProgID("Shell.Application");
+	dynamic shell = Activator.CreateInstance(t);
+
+	var objFolder = shell.NameSpace(FolderPath);
+	var objFolderItem = objFolder.ParseName(FileName);
+	var objInfo = objFolder.GetDetailsOf(objFolderItem, 27);
+	string prop = (string)objInfo; // <- video length.
